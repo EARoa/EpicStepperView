@@ -10,17 +10,13 @@
 
 @protocol StepperViewDelegate
 
--(void) stepperValueChanged:(int) number;
+//-(void) stepperValueChanged:(int) number;
 
 
 @end
 
 @interface StepperView : UIView
-{
-    
-    
-}
-
+@property (strong, nonatomic) UILabel *valueLabel;
 @property (nonatomic,weak) id<StepperViewDelegate> delegate;
 
 @end
