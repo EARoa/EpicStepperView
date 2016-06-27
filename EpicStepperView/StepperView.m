@@ -29,7 +29,7 @@
     addButton.frame = CGRectMake(stepperView.frame.size.width/2 + 50, stepperView.frame.size.height/2 - 25, 100, 50);
     [addButton setBackgroundColor:[UIColor orangeColor]];
     [addButton setTitle:@"+" forState:UIControlStateNormal];
-    [addButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [addButton addTarget:self action:@selector(addButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:addButton];
     
 //    Subtract Button
@@ -37,31 +37,43 @@
     subButton.frame = CGRectMake(stepperView.frame.size.width/2 - 150, stepperView.frame.size.height/2 - 25, 100, 50);
     [subButton setBackgroundColor:[UIColor orangeColor]];
     [subButton setTitle:@"-" forState:UIControlStateNormal];
-   [subButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+   [subButton addTarget:self action:@selector(subButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:subButton];
     
 //    Label
     UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(stepperView.frame.size.width/2, stepperView.frame.size.height/2, 100, 100)];
-    [valueLabel setText:@"10"];
     [valueLabel setTextColor:[UIColor redColor]];
     [self addSubview:valueLabel];
+    
+    stepperStartValue = 0;
+    _valueLabel.text = [NSString stringWithFormat:@"%d", stepperStartValue];
+    
 }
 
 
--(void)buttonPressed:(id) sender{
+
+
+
+-(void) addButtonPress:(id) sender {
     
-    UIButton *button = (UIButton *) sender;
-    NSString *title = button.titleLabel.text;
+    stepperStartValue++;
+    NSString *convertedValue = [NSString stringWithFormat:@"%d", stepperStartValue];
+    _valueLabel.text = convertedValue;
     
-    
-    if([title isEqualToString:@"-"]) {
-        NSLog(@"MINUS");
-        
-    } else {
-        NSLog(@"PLUS");
-    }
+    NSLog(@"%d", stepperStartValue);
+    [self.delegate stepperValueChanged:stepperStartValue];
 }
 
-
+-(void) subButtonPress:(id) sender {
+    
+    stepperStartValue--;
+    NSString *convertedValue = [NSString stringWithFormat:@"%d", stepperStartValue];
+    _valueLabel.text = convertedValue;
+    
+    
+    NSLog(@"%d", stepperStartValue);
+    [self.delegate stepperValueChanged:stepperStartValue];
+    
+}
 
 @end

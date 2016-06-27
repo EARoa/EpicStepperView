@@ -41,7 +41,6 @@
 //    Label
     UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(195, 318, 100, 100)];
     [valueLabel setTextColor:[UIColor redColor]];
-    
     [self.view addSubview:valueLabel];
     
     
